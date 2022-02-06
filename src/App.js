@@ -1,18 +1,20 @@
 import Header from "./components/Header";
+import Content from "./components/Content";
+import Footer from "./components/Footer";
+import Modal from "./components/Modal";
 
 
 function App() {
     return (
         <>
-            <Header />
+            {/* <Header />
 
-            <div className="grid-cols-1" >
+            <Content />
 
-            </div>
-
-            <div className="grid-cols-1" >
-
-            </div>
+            <Footer /> */}
+            <Modal>
+                Hello
+            </Modal>
         </>
     );
 }
