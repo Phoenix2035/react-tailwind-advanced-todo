@@ -1,20 +1,17 @@
 import Header from "./components/Header";
 import Content from "./components/Content";
 import Footer from "./components/Footer";
-import Modal from "./components/Modal";
 
 
 function App() {
     return (
         <>
-            {/* <Header />
+            <Header />
 
             <Content />
 
-            <Footer /> */}
-            <Modal>
-                Hello
-            </Modal>
+            <Footer />
+            
         </>
     );
 }

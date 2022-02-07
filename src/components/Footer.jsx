@@ -7,8 +7,8 @@ const Footer = () => {
                 <div />
 
                 <div className="mr-4 flex items-center text-sm ">
-                    <label for="cars">Rows per page:</label>
-                    <select id="cars" className="cursor-pointer border-b border-gray-400 ml-2">
+                    <label for="rowsPerPage">Rows per page:</label>
+                    <select id="rowsPerPage" className="cursor-pointer border-b border-gray-400 ml-2">
                         <option value="5">5</option>
                         <option selected value="10" >10</option>
                         <option value="15">15</option>
