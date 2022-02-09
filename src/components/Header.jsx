@@ -2,13 +2,18 @@ import { useState } from "react";
 import { BsListCheck } from "react-icons/bs";
 import { BiSearchAlt2, BiFilterAlt } from "react-icons/bi";
 import { IoIosAdd } from "react-icons/io";
-import AddModal from "./Modals/AddModal";
+
+
+import AddEditModal from "./Modals/AddEditModal";
+import Drawer from "./Drawer";
+
 
 
 
 
 const Header = () => {
     const [openModal, setOpenModal] = useState(false)
+    const [openDrawer, setOpenDrawer] = useState(false)
 
     return (
         <>
@@ -28,7 +33,7 @@ const Header = () => {
                         </div>
                     </div>
                     <div className="hover:bg-indigo-400 rounded-full p-2 transition-all">
-                        <BiFilterAlt fontSize={24} cursor="pointer" />
+                        <BiFilterAlt fontSize={24} cursor="pointer" onClick={() => setOpenDrawer(true)} />
                     </div>
                     <div className="hover:bg-indigo-400 rounded-full p-2 transition-all">
                         <IoIosAdd fontSize={24} cursor="pointer" onClick={() => setOpenModal(true)} />
@@ -36,7 +41,10 @@ const Header = () => {
                 </div>
             </div>
 
-            <AddModal openModal={openModal} setOpenModal={setOpenModal} />
+            <AddEditModal openModal={openModal} setOpenModal={setOpenModal} />
+
+            <Drawer openDrawer={openDrawer} setOpenDrawer={setOpenDrawer} />
+
         </>
     )
 };

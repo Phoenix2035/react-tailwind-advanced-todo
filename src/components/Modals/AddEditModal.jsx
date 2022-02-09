@@ -2,10 +2,10 @@ import { useState } from "react";
 import Modal from "./Modal";
 
 
-const AddModal = ({ openModal, setOpenModal }) => {
+const AddEditModal = ({ openModal, setOpenModal, editModal }) => {
     const [value, setValue] = useState(true)
     return (
-        <Modal title="New Task" confirmBtn="SAVE" openModal={openModal} setOpenModal={setOpenModal} btnDisable={value}>
+        <Modal title={editModal ? "Edit Task" : "New Task"} confirmBtn="SAVE" openModal={openModal} setOpenModal={setOpenModal} btnDisable={value}>
 
             <div className="grid">
                 <div className="grid grid-cols-1">
@@ -27,13 +27,7 @@ const AddModal = ({ openModal, setOpenModal }) => {
                         <option value="medium">Doing</option>
                         <option value="low">Done</option>
                     </select>
-
-
-
-
                     <input type="date" className="border border-gray-400 rounded-md py-2 px-2 text-md font-semibold  mt-6" />
-
-
                 </div>
 
             </div>
@@ -42,4 +36,4 @@ const AddModal = ({ openModal, setOpenModal }) => {
     )
 };
 
-export default AddModal;
+export default AddEditModal;
