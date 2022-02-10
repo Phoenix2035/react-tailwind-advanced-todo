@@ -8,9 +8,6 @@ import AddEditModal from "./Modals/AddEditModal";
 import Drawer from "./Drawer";
 
 
-
-
-
 const Header = () => {
     const [openModal, setOpenModal] = useState(false)
     const [openDrawer, setOpenDrawer] = useState(false)

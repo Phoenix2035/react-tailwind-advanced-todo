@@ -14,7 +14,7 @@ const Drawer = ({ openDrawer, setOpenDrawer }) => {
                     style={{ backgroundColor: "rgba(0,0,0,0.2)" }}
                 >
                     <Slide right >
-                        <div className="w-60 h-full absolute right-0 bg-red-400 p-3" onClick={e => e.stopPropagation()}>
+                        <div className="w-60 h-full absolute right-0 bg-gray-100 p-3" onClick={e => e.stopPropagation()}>
                             <div className="flex justify-around items-center">
                                 <BiFilterAlt className="bg-indigo-600 rounded-full p-2" fontSize={38} color="#fff" />
                                 <div className="select-none">
