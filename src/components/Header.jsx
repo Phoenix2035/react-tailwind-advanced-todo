@@ -1,5 +1,5 @@
 import {useState, useEffect} from "react"
-import {useDispatch,useSelector} from "react-redux"
+import {useDispatch} from "react-redux"
 import {BsListCheck} from "react-icons/bs"
 import {BiSearchAlt2, BiFilterAlt} from "react-icons/bi"
 import {IoIosAdd} from "react-icons/io"

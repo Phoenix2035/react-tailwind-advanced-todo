@@ -33,3 +33,4 @@ export function getTodoFromLocalStorage() {
     return localStorage.getItem("todo") ? JSON.parse(localStorage.getItem("todo")) : []
 }
 
+
