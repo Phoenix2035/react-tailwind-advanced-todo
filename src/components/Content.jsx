@@ -1,5 +1,6 @@
 import {useEffect, useState} from "react"
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux"
+import moment from "moment"
 import {MdModeEditOutline, MdDelete} from "react-icons/md"
 
 import {priorityColor, statusColor, dateColor} from "../utils";
@@ -14,6 +15,8 @@ const Content = () => {
 
     const dispatch = useDispatch()
     const {todo} = useSelector(state => state.todo)
+    const searchTodo = useSelector(state => state.todo.search)
+
 
     useEffect(() => {
         localStorage.setItem("todo", JSON.stringify(todo))
@@ -34,7 +37,7 @@ const Content = () => {
                             <table className="min-w-full">
                                 <thead className="bg-gray-300 ">
                                 <tr className="text-sm font-medium tracking-wider text-gray-700 text-center select-none">
-                                    <th className="py-3 px-6 border-r">
+                                    <th className="w-3/12 py-3 px-6 border-r">
                                         Task
                                     </th>
                                     <th className="py-3 px-6 border-r">
@@ -53,8 +56,7 @@ const Content = () => {
                                 </thead>
                                 <tbody>
                                 {
-                                    todo && todo.map(item =>
-
+                                    searchTodo && searchTodo.map(item =>
                                         <tr className="bg-white border-b hover:bg-gray-100 select-none" key={item.id}>
                                             <td className="py-3 pl-2 border-r">
                                                 {item.name}
@@ -75,13 +77,13 @@ const Content = () => {
                                             </td>
 
                                             <td className="py-3 pl-2 text-center border-r">
-                                                 {/*<span className="px-3 py-1 rounded-2xl text-white"*/}
-                                                 {/*      style={{*/}
-                                                 {/*          color: `${dateColor(item.date)}`,*/}
-                                                 {/*          border: `1px solid ${dateColor(item.date)}`,*/}
-                                                 {/*      }}>*/}
-                                                    {item.date}
-                                               {/*</span>*/}
+                                                <span className="px-3 py-1 rounded-2xl text-white"
+                                                      style={{
+                                                          color: `${dateColor(moment(item.date).format("X"))}`,
+                                                          border: `1px solid ${dateColor(moment(item.date).format("X"))}`,
+                                                      }}>
+                                                {moment(item.date).format("YYYY/MM/DD")}
+                                                </span>
                                             </td>
 
                                             <td className="py-3 pl-2 text-center">

@@ -1,3 +1,5 @@
+import moment from "moment"
+
 export function priorityColor(priority) {
     if (priority === "Low") {
         return "#9E9E9E"
@@ -19,13 +21,8 @@ export function statusColor(status) {
 }
 
 
-export function dateColor(dateColor) {
-    const arrDate = dateColor.split("-")
-    const year = arrDate[0]
-    const month = arrDate[1]
-    const day = arrDate[2]
-
-    if (new Date().getTime() < new Date(year, month, day).getTime()) {
+export function dateColor(timeStamp) {
+    if (moment().format("X") < timeStamp) {
         return "#4CAF50"
     } else {
         return "#F44336"
