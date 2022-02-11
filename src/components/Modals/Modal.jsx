@@ -1,6 +1,12 @@
 import {Fade} from "react-reveal"
 
 const Modal = ({title, confirmBtn, children, openModal, setOpenModal, btnDisable, deleteModal, submitHandler}) => {
+
+    const handleSubmit = () => {
+        setOpenModal(false);
+        submitHandler()
+    }
+
     return (
         <>
             {
@@ -29,11 +35,11 @@ const Modal = ({title, confirmBtn, children, openModal, setOpenModal, btnDisable
                                         className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded">Close
                                 </button>
 
-                                <button type="submit" onClick={() => {
-                                    setOpenModal(false);
-                                    submitHandler()
-                                }} className="bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded"
-                                        disabled={btnDisable}>{confirmBtn}</button>
+                                <button type="submit" onClick={handleSubmit}
+                                        className="bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded"
+                                        disabled={btnDisable}>
+                                    {confirmBtn}
+                                </button>
                             </div>
                         </div>
                     </Fade>

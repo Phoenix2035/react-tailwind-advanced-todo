@@ -10,24 +10,31 @@ const AddEditModal = ({openModal, setOpenModal, editModal}) => {
     const [buttonStatus, setButtonStatus] = useState(true);
 
     const [todoState, setTodoState] = useState({
+        id: '',
         name: '',
         priority: '',
         status: '',
         date: ''
     })
 
-
     const handleChange = (e) => {
-        setTodoState({...todoState, [e.target.name]: e.target.value})
+        setTodoState({...todoState, id: Date.now().toString(), [e.target.name]: e.target.value})
     }
 
     useEffect(() => {
-        (todoState.name && todoState.priority  && todoState.status && todoState.date) ? setButtonStatus(false) : setButtonStatus(true);
+        (todoState.name && todoState.priority && todoState.status && todoState.date) ? setButtonStatus(false) : setButtonStatus(true);
     }, [todoState.name, todoState.priority, todoState.status, todoState.date]);
 
 
     const addTodoSubmit = () => {
         dispatch(addTodo(todoState))
+        setTodoState({
+            id: '',
+            name: '',
+            priority: '',
+            status: '',
+            date: ''
+        })
     }
 
     return (
@@ -46,9 +53,9 @@ const AddEditModal = ({openModal, setOpenModal, editModal}) => {
                         className="cursor-pointer border border-gray-400 rounded-md py-2 px-2 text-md font-semibold mt-6"
                         onChange={handleChange} name="priority" value={todoState.priority}>
                         <option value="">Priority</option>
-                        <option value="high">High</option>
-                        <option value="medium">Medium</option>
-                        <option value="low">Low</option>
+                        <option value="High">High</option>
+                        <option value="Medium">Medium</option>
+                        <option value="Low">Low</option>
                     </select>
 
 
@@ -56,9 +63,9 @@ const AddEditModal = ({openModal, setOpenModal, editModal}) => {
                         className="cursor-pointer border border-gray-400 rounded-md py-2 px-2 text-md font-semibold mt-6"
                         onChange={handleChange} name="status" value={todoState.status}>
                         <option value="">Status</option>
-                        <option value="high">Todo</option>
-                        <option value="medium">Doing</option>
-                        <option value="low">Done</option>
+                        <option value="Todo">Todo</option>
+                        <option value="Doing">Doing</option>
+                        <option value="Done">Done</option>
                     </select>
 
                     <input type="date"
