@@ -1,18 +1,16 @@
-import {createSlice} from "@reduxjs/toolkit";
-import {getTodoFromLocalStorage, containsIncludes} from "../../utils";
+import {createSlice} from "@reduxjs/toolkit"
+import {getTodoFromLocalStorage} from "../../utils"
 
 const TodoReducer = createSlice({
     name: "todo",
     initialState: {
         todo: getTodoFromLocalStorage(),
         search: [],
-        filterPriority: []
     },
     reducers: {
         addTodo: (state, action) => {
             state.todo.push(action.payload)
             state.search = [...state.todo];
-            state.filter = [...state.todo]
         },
         deleteTodo: (state, action) => {
             state.todo = state.todo.filter(item => item.id !== action.payload)
@@ -28,19 +26,31 @@ const TodoReducer = createSlice({
             })
         },
         filterPriorityAction: (state, action) => {
-            state.filterPriority = state.todo.filter(item => {
+            state.search = state.todo.filter(item => {
                 if (action.payload === "All") return state.todo
                 return item.priority.toLowerCase().includes(action.payload.toLowerCase())
             })
-            state.search = state.filterPriority
         },
         filterStatusAction: (state, action) => {
-            state.filterStatus = state.todo.filter(item => {
+            state.search = state.todo.filter(item => {
                 if (action.payload === "All") return state.todo
                 return item.status.toLowerCase().includes(action.payload.toLowerCase())
             })
-            state.search = state.filterStatus
-        }
+        },
+        // filterDateAction: (state, action) => {
+        //     const today = moment().format("X")
+        //     state.search = state.todo.filter(item => {
+        //         if (action.payload === "All") return state.todo
+        //
+        //         if (action.payload === today) {
+        //             return item.date.includes(action.payload)
+        //         } else if (action.payload < today) {
+        //             return item.date.includes(action.payload)
+        //         } else {
+        //             return item.date.includes(action.payload)
+        //         }
+        //     })
+        // },
     }
 })
 

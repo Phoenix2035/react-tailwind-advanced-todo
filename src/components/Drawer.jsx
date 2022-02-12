@@ -8,17 +8,23 @@ import {filterPriorityAction, filterStatusAction} from "../redux/models/todo.red
 
 const Drawer = ({openDrawer, setOpenDrawer}) => {
     const dispatch = useDispatch()
+
     const [filterPriority, setFilterPriority] = useState("")
     const [filterStatus, setFilterStatus] = useState("")
 
 
+    const handleFilterReset = () => {
+        setFilterPriority("All")
+        setFilterStatus("All")
+    }
+
     useEffect(() => {
         dispatch(filterPriorityAction(filterPriority))
-    }, [filterPriority])
+    }, [dispatch, filterPriority])
 
     useEffect(() => {
         dispatch(filterStatusAction(filterStatus))
-    }, [filterStatus])
+    }, [dispatch, filterStatus])
 
 
     return (
@@ -48,7 +54,7 @@ const Drawer = ({openDrawer, setOpenDrawer}) => {
                             <div className="grid grid-cols-1">
                                 <select
                                     className="cursor-pointer border border-gray-400 rounded-md py-2 px-2 text-md font-semibold mt-6"
-                                    onChange={e => setFilterPriority(e.target.value)}>
+                                    onChange={e => setFilterPriority(e.target.value)} value={filterPriority}>
                                     <option value="All">All</option>
                                     <option value="High">High</option>
                                     <option value="Medium">Medium</option>
@@ -58,14 +64,28 @@ const Drawer = ({openDrawer, setOpenDrawer}) => {
 
                                 <select
                                     className="cursor-pointer border border-gray-400 rounded-md py-2 px-2 text-md font-semibold mt-6"
-                                    onChange={e => setFilterStatus(e.target.value)}>
+                                    onChange={e => setFilterStatus(e.target.value)} value={filterStatus}>
                                     <option value="All">All</option>
                                     <option value="Todo">Todo</option>
                                     <option value="Doing">Doing</option>
                                     <option value="Done">Done</option>
                                 </select>
-                                <input type="date"
-                                       className="border border-gray-400 rounded-md py-2 px-2 text-md font-semibold  mt-6"/>
+
+                                {/*<select*/}
+                                {/*    className="cursor-pointer border border-gray-400 rounded-md py-2 px-2 text-md font-semibold mt-6"*/}
+                                {/*    onChange={handleChange}>*/}
+                                {/*    <option value={0}>All</option>*/}
+                                {/*    <option value={1}>Overdue</option>*/}
+                                {/*    <option value={2}>For Today</option>*/}
+                                {/*    <option value={3}>For the Future</option>*/}
+                                {/*</select>*/}
+
+                                <div className="text-center">
+                                    <button onClick={handleFilterReset}
+                                            className="w-2/6 border border-indigo-400 hover:bg-indigo-500 hover:text-white rounded-md py-2 px-2 text-md font-semibold mt-10">
+                                        Reset
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </Slide>

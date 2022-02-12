@@ -6,7 +6,7 @@ import {IoIosAdd} from "react-icons/io"
 import {searchTodo} from "../redux/models/todo.reducer";
 
 
-import AddEditModal from "./Modals/AddEditModal"
+import AddModal from "./Modals/AddModal"
 import Drawer from "./Drawer"
 
 
@@ -19,7 +19,7 @@ const Header = () => {
 
     useEffect(() => {
         dispatch(searchTodo(searchTerm))
-    }, [searchTerm])
+    }, [dispatch, searchTerm])
 
     return (
         <>
@@ -48,7 +48,7 @@ const Header = () => {
                 </div>
             </div>
 
-            <AddEditModal openModal={openModal} setOpenModal={setOpenModal}/>
+            <AddModal openModal={openModal} setOpenModal={setOpenModal}/>
 
             <Drawer openDrawer={openDrawer} setOpenDrawer={setOpenDrawer}/>
 

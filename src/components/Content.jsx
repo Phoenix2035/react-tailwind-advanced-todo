@@ -4,7 +4,7 @@ import moment from "moment"
 import {MdModeEditOutline, MdDelete} from "react-icons/md"
 
 import {priorityColor, statusColor, dateColor} from "../utils";
-import AddEditModal from "./Modals/AddEditModal";
+import AddModal from "./Modals/AddModal";
 import DeleteModal from "./Modals/DeleteModal";
 import {deleteTodo} from "../redux/models/todo.reducer";
 
@@ -109,7 +109,7 @@ const Content = () => {
                 </div>
             </div>
 
-            <AddEditModal openModal={openEditModal} setOpenModal={setOpenEditModal} editModal/>
+            <AddModal openModal={openEditModal} setOpenModal={setOpenEditModal} editModal/>
             <DeleteModal openModal={openDeleteModal} setOpenModal={setOpenDeleteModal} deleteModal
                          deleteHandler={() => dispatch(deleteTodo(todoId))}
             />

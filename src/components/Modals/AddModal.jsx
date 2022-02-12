@@ -5,7 +5,7 @@ import Modal from "./Modal";
 import {addTodo} from "../../redux/models/todo.reducer";
 
 
-const AddEditModal = ({openModal, setOpenModal, editModal}) => {
+const AddModal = ({openModal, setOpenModal, editModal}) => {
     const dispatch = useDispatch()
     const [buttonStatus, setButtonStatus] = useState(true);
 
@@ -79,4 +79,4 @@ const AddEditModal = ({openModal, setOpenModal, editModal}) => {
     )
 };
 
-export default AddEditModal;
+export default AddModal;
