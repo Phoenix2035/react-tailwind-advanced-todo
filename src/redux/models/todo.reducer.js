@@ -8,8 +8,8 @@ const TodoReducer = createSlice({
         search: [],
     },
     reducers: {
-        addTodo: (state, action) => {
-            state.todo.push(action.payload)
+        addTodo: (state, {payload}) => {
+            state.todo = state.todo.map(item => item.id === payload.id ? payload : item)
             state.search = [...state.todo];
         },
         deleteTodo: (state, action) => {

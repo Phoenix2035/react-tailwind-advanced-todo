@@ -98,6 +98,7 @@ const Content = () => {
                                                         onClick={() => {
                                                             setOpenEditModal(true)
                                                             setEditMode(true)
+                                                            setTodoId(item.id)
                                                         }}/>
 
                                                     <MdDelete className="hover:bg-red-300 rounded-full p-2"
@@ -117,7 +118,8 @@ const Content = () => {
             </div>
 
             {
-                editMode ? <EditModal openModal={openEditModal} setOpenModal={setOpenEditModal}/> :
+                editMode ?
+                    <EditModal openModal={openEditModal} setOpenModal={setOpenEditModal} editTodo={searchTodo} editId={todoId}/> :
                     <AddModal openModal={openAddModal} setOpenModal={setOpenAddModal}/>
             }
             <DeleteModal openModal={openDeleteModal} setOpenModal={setOpenDeleteModal} deleteModal
