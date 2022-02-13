@@ -5,7 +5,7 @@ import Modal from "./Modal";
 import { addTodo } from "../../redux/models/todo.reducer";
 
 
-const AddModal = ({ openModal, setOpenModal }) => {
+const EditModal = ({ openModal, setOpenModal, editMode }) => {
     const dispatch = useDispatch()
     const [buttonStatus, setButtonStatus] = useState(true);
 
@@ -38,7 +38,7 @@ const AddModal = ({ openModal, setOpenModal }) => {
     }
 
     return (
-        <Modal title="New Task" confirmBtn="SAVE" openModal={openModal}
+        <Modal title="Edit Task" confirmBtn="SAVE" openModal={openModal}
             setOpenModal={setOpenModal} submitHandler={addTodoSubmit} btnDisable={buttonStatus}>
 
             <div className="grid">
@@ -79,4 +79,4 @@ const AddModal = ({ openModal, setOpenModal }) => {
     )
 };
 
-export default AddModal;
+export default EditModal;

@@ -15,7 +15,6 @@ const TodoReducer = createSlice({
         deleteTodo: (state, action) => {
             state.todo = state.todo.filter(item => item.id !== action.payload)
             state.search = state.search.filter(item => item.id !== action.payload)
-            state.filterPriority = state.filterPriority.filter(item => item.id !== action.payload)
             localStorage.setItem("todo", JSON.stringify(state.todo));
         },
         searchTodo: (state, action) => {

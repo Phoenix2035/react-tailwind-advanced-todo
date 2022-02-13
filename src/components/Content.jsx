@@ -5,12 +5,16 @@ import {MdModeEditOutline, MdDelete} from "react-icons/md"
 
 import {priorityColor, statusColor, dateColor} from "../utils";
 import AddModal from "./Modals/AddModal";
+import EditModal from "./Modals/EditModal";
 import DeleteModal from "./Modals/DeleteModal";
 import {deleteTodo} from "../redux/models/todo.reducer";
 
 const Content = () => {
+    const [openAddModal, setOpenAddModal] = useState(false)
     const [openEditModal, setOpenEditModal] = useState(false)
     const [openDeleteModal, setOpenDeleteModal] = useState(false)
+
+    const [editMode, setEditMode] = useState(false)
     let [todoId, setTodoId] = useState("")
 
     const dispatch = useDispatch()
@@ -91,7 +95,10 @@ const Content = () => {
                                                     <MdModeEditOutline
                                                         className="mr-2 hover:bg-green-300 rounded-full p-2"
                                                         cursor="pointer" color="gray" fontSize={34}
-                                                        onClick={() => setOpenEditModal(true)}/>
+                                                        onClick={() => {
+                                                            setOpenEditModal(true)
+                                                            setEditMode(true)
+                                                        }}/>
 
                                                     <MdDelete className="hover:bg-red-300 rounded-full p-2"
                                                               cursor="pointer"
@@ -109,7 +116,10 @@ const Content = () => {
                 </div>
             </div>
 
-            <AddModal openModal={openEditModal} setOpenModal={setOpenEditModal} editModal/>
+            {
+                editMode ? <EditModal openModal={openEditModal} setOpenModal={setOpenEditModal}/> :
+                    <AddModal openModal={openAddModal} setOpenModal={setOpenAddModal}/>
+            }
             <DeleteModal openModal={openDeleteModal} setOpenModal={setOpenDeleteModal} deleteModal
                          deleteHandler={() => dispatch(deleteTodo(todoId))}
             />
