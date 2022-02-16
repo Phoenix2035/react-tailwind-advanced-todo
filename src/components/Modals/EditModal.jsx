@@ -2,7 +2,7 @@ import {useCallback, useEffect, useState} from "react";
 import {useDispatch} from "react-redux";
 
 import Modal from "./Modal";
-import {addTodo} from "../../redux/models/todo.reducer";
+import { addTodo } from "../../redux/models/todo.reducer";
 
 
 const EditModal = ({openModal, setOpenModal, editId, editTodo}) => {

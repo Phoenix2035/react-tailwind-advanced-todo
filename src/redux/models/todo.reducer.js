@@ -1,5 +1,5 @@
-import {createSlice} from "@reduxjs/toolkit"
-import {getTodoFromLocalStorage} from "../../utils"
+import { createSlice } from "@reduxjs/toolkit"
+import { getTodoFromLocalStorage } from "../../utils"
 
 const TodoReducer = createSlice({
     name: "todo",
@@ -8,9 +8,20 @@ const TodoReducer = createSlice({
         search: [],
     },
     reducers: {
-        addTodo: (state, {payload}) => {
-            state.todo = state.todo.map(item => item.id === payload.id ? payload : item)
-            state.search = [...state.todo];
+        addTodo: (state, { payload }) => {
+            if (payload.hasOwnProperty("editId")) {
+                state.todo = state.todo.map(item => item.id === payload.editId ? {
+                    id: payload.editId,
+                    name: payload.name,
+                    priority: payload.priority,
+                    status: payload.status,
+                    date: payload.date
+                } : item)
+                state.search = [...state.todo]
+            } else {
+                state.todo.push(payload)
+                state.search = [...state.todo]
+            }
         },
         deleteTodo: (state, action) => {
             state.todo = state.todo.filter(item => item.id !== action.payload)
@@ -36,26 +47,13 @@ const TodoReducer = createSlice({
                 return item.status.toLowerCase().includes(action.payload.toLowerCase())
             })
         },
-        // filterDateAction: (state, action) => {
-        //     const today = moment().format("X")
-        //     state.search = state.todo.filter(item => {
-        //         if (action.payload === "All") return state.todo
-        //
-        //         if (action.payload === today) {
-        //             return item.date.includes(action.payload)
-        //         } else if (action.payload < today) {
-        //             return item.date.includes(action.payload)
-        //         } else {
-        //             return item.date.includes(action.payload)
-        //         }
-        //     })
-        // },
     }
 })
 
 
 export const {
     addTodo,
+    editTodoReducer,
     deleteTodo,
     searchTodo,
     filterPriorityAction,
