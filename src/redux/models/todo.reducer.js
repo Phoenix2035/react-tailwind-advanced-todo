@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit"
+import { createSlice, current } from "@reduxjs/toolkit"
 import { getTodoFromLocalStorage } from "../../utils"
 
 const TodoReducer = createSlice({
@@ -47,6 +47,9 @@ const TodoReducer = createSlice({
                 return item.status.toLowerCase().includes(action.payload.toLowerCase())
             })
         },
+        rowsPerPageAction: (state, { payload }) => {
+            state.search = state.todo.slice(0, payload)
+        }
     }
 })
 
@@ -57,7 +60,8 @@ export const {
     deleteTodo,
     searchTodo,
     filterPriorityAction,
-    filterStatusAction
+    filterStatusAction,
+    rowsPerPageAction
 } = TodoReducer.actions
 
 export default TodoReducer.reducer
