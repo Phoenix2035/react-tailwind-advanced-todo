@@ -31,13 +31,14 @@ const Footer = () => {
                                 <option value={todoLength}>All</option>
                             </select>
 
-                            <div className="ml-4">
+                            <div className="ml-4 select-none">
                                 1-{rowsPerPage === "5" ? 5 : rowsPerPage === "10" ? 10 : todoLength} of {todoLength}
                             </div>
 
                             <div className="flex justify-around items-center ml-8 transition">
+
                                 <BsChevronLeft cursor="pointer"
-                                    className="mr-2 hover:bg-gray-200 rounded-full p-2 text-3xl"
+                                    className={`mr-2 hover:bg-gray-200 rounded-full p-2 text-3xl `}
                                     color="gray" />
                                 <div>
                                     <BsChevronRight cursor="pointer"

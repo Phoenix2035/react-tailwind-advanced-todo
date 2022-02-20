@@ -1,4 +1,6 @@
 import moment from "moment"
+import { MdArrowUpward, MdArrowDownward } from "react-icons/md"
+
 
 export function priorityColor(priority) {
     if (priority === "Low") {
@@ -34,3 +36,25 @@ export function getTodoFromLocalStorage() {
 }
 
 
+export const orderBy = (orderTodo, direction) => {
+    switch (direction) {
+        case "asc":
+            return [...orderTodo].sort((a, b) => a > b ? 1 : -1)
+        case "desc":
+            return [...orderTodo].sort((a, b) => a > b ? -1 : 1)
+        default:
+            return orderTodo
+    }
+}
+
+export const SortArrow = ({ direction }) => {
+    if (!direction) return <span className="invisible"><MdArrowDownward /></span>
+
+    if (direction === "asc") {
+        return <MdArrowUpward />
+
+    } else {
+        return <MdArrowDownward />
+
+    }
+}
