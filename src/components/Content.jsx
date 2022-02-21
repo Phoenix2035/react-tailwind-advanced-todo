@@ -9,6 +9,8 @@ import EditModal from "./Modals/EditModal";
 import DeleteModal from "./Modals/DeleteModal";
 import { deleteTodo } from "../redux/models/todo.reducer";
 
+
+
 const Content = () => {
     const [openAddModal, setOpenAddModal] = useState(false)
     const [openEditModal, setOpenEditModal] = useState(false)
@@ -32,9 +34,10 @@ const Content = () => {
     }
 
 
-    const [dir, setDir] = useState()
+    const [dir, setDir] = useState(null)
+    const [sortValue, setSortValue] = useState()
 
-    const orderedCountry = orderBy(searchTodo, dir)
+    const orderedTodo = orderBy(searchTodo, sortValue, dir)
 
     const switchDirection = () => {
         if (!dir) {
@@ -46,7 +49,12 @@ const Content = () => {
         }
     }
 
- 
+    const setSortValueAndDirection = (val) => {
+        switchDirection()
+        setSortValue(val)
+    }
+
+
 
     return (
         <>
@@ -57,19 +65,33 @@ const Content = () => {
                             <table className="min-w-full">
                                 <thead className="bg-gray-300 ">
                                     <tr className="text-sm font-medium tracking-wider text-gray-700 text-center select-none">
-                                        <th className="flex justify-center items-center py-3 border-r cursor-pointer" onClick={() => switchDirection()}>
-                                            <span>
-                                                Task Name
-                                            </span>
-                                            <span>
-                                                <SortArrow direction={dir} />
-                                            </span>
+                                        <th className=" py-3 border-r  px-6 " >
+                                            Task Name
                                         </th>
-                                        <th className=" py-3 px-6  border-r " >
-                                            Priority
+                                        <th className="py-3  border-r" >
+                                            <div className="flex justify-center items-center cursor-pointer" onClick={() => setSortValueAndDirection("priority")}>
+                                                <span>
+                                                    Priority
+                                                </span>
+                                                <span>
+                                                    {
+                                                        sortValue === "priority" && <SortArrow direction={dir} />
+                                                    }
+                                                </span>
+                                            </div>
+
                                         </th>
-                                        <th className="py-3 px-6 border-r">
-                                            Status
+                                        <th className=" py-3 border-r" onClick={() => setSortValueAndDirection("status")}>
+                                            <div className="flex justify-center items-center cursor-pointer" onClick={() => setSortValueAndDirection("status")}>
+                                                <span>
+                                                    Status
+                                                </span>
+                                                <span>
+                                                    {
+                                                        sortValue === "status" && <SortArrow direction={dir} />
+                                                    }
+                                                </span>
+                                            </div>
                                         </th>
                                         <th className="py-3 px-6 border-r">
                                             Deadline
@@ -81,7 +103,7 @@ const Content = () => {
                                 </thead>
                                 <tbody>
                                     {
-                                        orderedCountry && orderedCountry.map(item =>
+                                        orderedTodo && orderedTodo.map(item =>
                                             <tr className="bg-white border-b hover:bg-gray-100 select-none" key={item.id}>
                                                 <td className="py-3 pl-2 border-r">
                                                     {item.name}

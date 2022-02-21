@@ -36,12 +36,20 @@ export function getTodoFromLocalStorage() {
 }
 
 
-export const orderBy = (orderTodo, direction) => {
+export const orderBy = (orderTodo, value, direction) => {
+    const priorities = ['Low', 'Medium', 'High']
+    const statuses = ["Todo", "Doing", "Done"]
+
+
     switch (direction) {
         case "asc":
-            return [...orderTodo].sort((a, b) => a > b ? 1 : -1)
+            return [...orderTodo].sort((a, b) => {
+                return value === "priority" ? priorities.indexOf(a.priority) - priorities.indexOf(b.priority) : statuses.indexOf(a.status) - statuses.indexOf(b.status)
+            })
         case "desc":
-            return [...orderTodo].sort((a, b) => a > b ? -1 : 1)
+            return [...orderTodo].sort((a, b) => {
+                return value === "priority" ? priorities.indexOf(b.priority) - priorities.indexOf(a.priority) : statuses.indexOf(b.status) - statuses.indexOf(a.status)
+            })
         default:
             return orderTodo
     }
