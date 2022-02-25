@@ -53,8 +53,8 @@ const TodoReducer = createSlice({
         },
         paginationAction: (state, { payload: { totalPages, page, rowsPerPage, todoLength } }) => {
             let fromItem = (page - 1) * rowsPerPage
-            const x = rowsPerPage * page
-            let toItem = x > todoLength ? todoLength : x
+            const all = rowsPerPage * page
+            let toItem = all > todoLength ? todoLength : all
 
             if (todoLength === toItem) {
                 state.lastPage = true
