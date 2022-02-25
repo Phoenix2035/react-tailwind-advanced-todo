@@ -6,6 +6,7 @@ const TodoReducer = createSlice({
     initialState: {
         todo: getTodoFromLocalStorage(),
         search: [],
+        lastPage: false
     },
     reducers: {
         addTodo: (state, { payload }) => {
@@ -49,6 +50,20 @@ const TodoReducer = createSlice({
         },
         rowsPerPageAction: (state, { payload }) => {
             state.search = state.todo.slice(0, payload)
+        },
+        paginationAction: (state, { payload: { totalPages, page, rowsPerPage, todoLength } }) => {
+            let fromItem = (page - 1) * rowsPerPage
+            const x = rowsPerPage * page
+            let toItem = x > todoLength ? todoLength : x
+
+            if (todoLength === toItem) {
+                state.lastPage = true
+            } else {
+                state.lastPage = false
+            }
+
+            state.search = state.todo.slice(fromItem, toItem)
+
         }
     }
 })
@@ -61,7 +76,8 @@ export const {
     searchTodo,
     filterPriorityAction,
     filterStatusAction,
-    rowsPerPageAction
+    rowsPerPageAction,
+    paginationAction
 } = TodoReducer.actions
 
 export default TodoReducer.reducer
